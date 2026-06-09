@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import curses
+from urllib.parse import quote_plus
 from .common import BASE_URL
 
 MAX_PAGES = 5
@@ -40,7 +41,7 @@ def search_for_movie():
         url = (
             f"{BASE_URL}/index.php?do=search&subaction=search"
             f"&search_start={page * 2}&full_search=0"
-            f"&result_from={result_from}&story={keyword}"
+            f"&result_from={result_from}&story={quote_plus(keyword)}"
         )
         try:
             response = session.get(url, timeout=15)

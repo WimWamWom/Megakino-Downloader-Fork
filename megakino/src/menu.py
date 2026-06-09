@@ -15,10 +15,10 @@ def main():
         results = get_html_from_search()
         HTML_CONTENTS.extend(results)
         if not results:
+            answer = input("Keine Ergebnisse. Erneut suchen? (j/n): ").strip().lower()
+            if answer == 'j':
+                continue
             if not HTML_CONTENTS:
-                answer = input("Keine Ergebnisse. Erneut suchen? (j/n): ").strip().lower()
-                if answer == 'j':
-                    continue
                 return
             break
         answer = input("Weitere Suche hinzufügen? (j/n): ").strip().lower()
