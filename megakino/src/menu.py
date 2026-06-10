@@ -15,15 +15,19 @@ def main():
         results = get_html_from_search()
         HTML_CONTENTS.extend(results)
         if not results:
-            answer = input("Keine Ergebnisse. Erneut suchen? (j/n): ").strip().lower()
-            if answer == 'j':
+            answer = input("No results. Search again? (y/n): ").strip().lower()
+            if answer == 'y':
                 continue
             if not HTML_CONTENTS:
                 return
             break
-        answer = input("Weitere Suche hinzufügen? (j/n): ").strip().lower()
-        if answer != 'j':
+        answer = input("Add additional search? (y/n): ").strip().lower()
+        if answer == 'n':
             break
+        elif answer == 'y':
+            continue
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
 
     episodes = {}
     for soup in HTML_CONTENTS:
@@ -36,7 +40,7 @@ def main():
 
             self.provider = self.add(npyscreen.TitleSelectOne, name="Provider:", max_height=5, values=["Megakino", "VOE"], scroll_exit=True, value=0)
 
-            self.download_path = self.add(npyscreen.TitleFilenameCombo, name="Download-Pfad:", value=str(_args.path))
+            self.download_path = self.add(npyscreen.TitleFilenameCombo, name="Download Path:", value=str(_args.path))
 
             self.episodes = self.add(npyscreen.TitleMultiSelect, name="Choose Episodes:", values=[">>> Select all <<<"] + titles, scroll_exit=True)
             self._select_all_active = False
