@@ -21,17 +21,24 @@ BASE_URL = get_latest_domain()
 
 def get_html_from_search():
     from .search import search_for_movie
-    url = search_for_movie()
+    try:
+        urls = search_for_movie()
+    except ValueError as e:
+        print(f"\nKeine Ergebnisse: {e}")
+        return []
+    if not urls:
+        return []
     session = requests.Session()
+    soups = []
     try:
         session.get(f"{BASE_URL}/index.php?yg=token", timeout=15)
-        response = session.get(url, timeout=15)
-        response.raise_for_status()
+        for url in urls:
+            response = session.get(url, timeout=15)
+            response.raise_for_status()
+            soups.append(BeautifulSoup(response.content, 'html.parser'))
     except requests.RequestException as e:
         print(f"Error: Unable to fetch the page. Details: {e}")
-        return None
-    soup = BeautifulSoup(response.content, 'html.parser')
-    return soup
+    return soups
 
 
 def get_megakino_episodes(soup):

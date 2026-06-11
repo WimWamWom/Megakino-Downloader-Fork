@@ -11,13 +11,33 @@ Just run this command to install the tool!
 ```shell
 pip install megakino
 ```
-To start the menu type:
+To start the menu:
 ```shell
 megakino
 ```
-Also you have one option right now for specifying a path:
+Optionally specify a default download path:
 ```shell
 megakino --path "E:\Videos"
+```
+
+## Usage
+
+### Search
+- Start the program and enter a search term
+- Use **Arrow keys** to navigate, **Space** to select/deselect titles, **Enter** to confirm
+- Multiple titles can be selected at once
+- After confirming, you will be asked if you want to run another search — repeat as many times as needed before starting the download
+
+### Episode/Movie selection (npyscreen menu)
+- **Action**: Choose between Watch, Download or Syncplay
+- **Provider**: Choose between Megakino or VOE
+- **Download path**: Set the download folder (only used for Download action)
+- **Choose Episodes**: Select individual episodes/movies or pick **`>>> Select all <<<`** at the top to select everything
+
+### Download output
+The download progress is shown as:
+```
+[download] Pets (Film 1/3)  26.1% of ~1.81GiB at 9.66MiB/s ETA 02:21 (frag 116/445)
 ```
 
 ## Dependencies/Credits
